@@ -40,8 +40,7 @@ void AudioEffectReverbInstance::process(const AudioFrame *p_src_frames, AudioFra
 		r.set_room_size(base->room_size);
 		r.set_damp(base->damping);
 		r.set_extra_spread(base->spread);
-		r.set_wet(base->wet);
-		r.set_dry(base->dry);
+		r.set_wet_dry(base->wet_dry);
 	}
 
 	int todo = p_frame_count;
@@ -106,12 +105,8 @@ void AudioEffectReverb::set_spread(float p_spread) {
 	spread = p_spread;
 }
 
-void AudioEffectReverb::set_dry(float p_dry) {
-	dry = p_dry;
-}
-
-void AudioEffectReverb::set_wet(float p_wet) {
-	wet = p_wet;
+void AudioEffectReverb::set_wet_dry(float p_wet_dry) {
+	wet_dry = p_wet_dry;
 }
 
 void AudioEffectReverb::set_hpf(float p_hpf) {
@@ -138,12 +133,8 @@ float AudioEffectReverb::get_spread() const {
 	return spread;
 }
 
-float AudioEffectReverb::get_dry() const {
-	return dry;
-}
-
-float AudioEffectReverb::get_wet() const {
-	return wet;
+float AudioEffectReverb::get_wet_dry() const {
+	return wet_dry;
 }
 
 float AudioEffectReverb::get_hpf() const {
@@ -166,11 +157,8 @@ void AudioEffectReverb::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_spread", "amount"), &AudioEffectReverb::set_spread);
 	ClassDB::bind_method(D_METHOD("get_spread"), &AudioEffectReverb::get_spread);
 
-	ClassDB::bind_method(D_METHOD("set_dry", "amount"), &AudioEffectReverb::set_dry);
-	ClassDB::bind_method(D_METHOD("get_dry"), &AudioEffectReverb::get_dry);
-
-	ClassDB::bind_method(D_METHOD("set_wet", "amount"), &AudioEffectReverb::set_wet);
-	ClassDB::bind_method(D_METHOD("get_wet"), &AudioEffectReverb::get_wet);
+	ClassDB::bind_method(D_METHOD("set_wet_dry", "amount"), &AudioEffectReverb::set_wet_dry);
+	ClassDB::bind_method(D_METHOD("get_wet_dry"), &AudioEffectReverb::get_wet_dry);
 
 	ClassDB::bind_method(D_METHOD("set_hpf", "amount"), &AudioEffectReverb::set_hpf);
 	ClassDB::bind_method(D_METHOD("get_hpf"), &AudioEffectReverb::get_hpf);
@@ -183,8 +171,7 @@ void AudioEffectReverb::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "damping", PROPERTY_HINT_RANGE, "0,1,0.01"), "set_damping", "get_damping");
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "spread", PROPERTY_HINT_RANGE, "0,1,0.01"), "set_spread", "get_spread");
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "hipass", PROPERTY_HINT_RANGE, "0,1,0.01"), "set_hpf", "get_hpf");
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "dry", PROPERTY_HINT_RANGE, "0,1,0.01"), "set_dry", "get_dry");
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "wet", PROPERTY_HINT_RANGE, "0,1,0.01"), "set_wet", "get_wet");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "wet_dry", PROPERTY_HINT_RANGE, "0,1,0.01"), "set_wet_dry", "get_wet_dry");
 }
 
 AudioEffectReverb::AudioEffectReverb() {
@@ -194,6 +181,5 @@ AudioEffectReverb::AudioEffectReverb() {
 	room_size = 0.8;
 	damping = 0.5;
 	spread = 1.0;
-	dry = 1.0;
-	wet = 0.5;
+	wet_dry = 0.5;
 }

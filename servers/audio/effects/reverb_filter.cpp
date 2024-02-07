@@ -115,7 +115,7 @@ void Reverb::process(float *p_src, float *p_dst, int p_frames) {
 			out = out * (1.0 - c.damp) + c.damp_h * c.damp; //lowpass
 			c.damp_h = out;
 			c.buffer[c.pos] = input_buffer[j] + out;
-			p_dst[j] += out;
+			p_dst[j] += out * 0.125;
 			c.pos++;
 		}
 	}
@@ -172,7 +172,7 @@ void Reverb::process(float *p_src, float *p_dst, int p_frames) {
 	static const float wet_scale = 0.6;
 
 	for (int i = 0; i < p_frames; i++) {
-		p_dst[i] = p_dst[i] * params.wet * wet_scale + p_src[i] * params.dry;
+		p_dst[i] = (p_dst[i] * params.wet_dry * wet_scale) + (p_src[i] * (1 - params.wet_dry));
 	}
 }
 
@@ -186,12 +186,8 @@ void Reverb::set_damp(float p_damp) {
 	update_parameters();
 }
 
-void Reverb::set_wet(float p_wet) {
-	params.wet = p_wet;
-}
-
-void Reverb::set_dry(float p_dry) {
-	params.dry = p_dry;
+void Reverb::set_wet_dry(float p_wet_dry) {
+	params.wet_dry = p_wet_dry;
 }
 
 void Reverb::set_predelay(float p_predelay) {
@@ -320,8 +316,7 @@ void Reverb::clear_buffers() {
 Reverb::Reverb() {
 	params.room_size = 0.8;
 	params.damp = 0.5;
-	params.dry = 1.0;
-	params.wet = 0.0;
+	params.wet_dry = 0.0;
 	params.mix_rate = 44100;
 	params.extra_spread_base = 0;
 	params.extra_spread = 1.0;

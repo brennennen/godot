@@ -64,8 +64,7 @@ class AudioEffectReverb : public AudioEffect {
 	float room_size;
 	float damping;
 	float spread;
-	float dry;
-	float wet;
+	float wet_dry;
 
 protected:
 	static void _bind_methods();
@@ -76,8 +75,7 @@ public:
 	void set_room_size(float p_size);
 	void set_damping(float p_damping);
 	void set_spread(float p_spread);
-	void set_dry(float p_dry);
-	void set_wet(float p_wet);
+	void set_wet_dry(float p_wet);
 	void set_hpf(float p_hpf);
 
 	float get_predelay_msec() const;
@@ -85,8 +83,7 @@ public:
 	float get_room_size() const;
 	float get_damping() const;
 	float get_spread() const;
-	float get_dry() const;
-	float get_wet() const;
+	float get_wet_dry() const;
 	float get_hpf() const;
 
 	Ref<AudioEffectInstance> instantiate() override;

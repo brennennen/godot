@@ -86,8 +86,7 @@ private:
 	struct Parameters {
 		float room_size;
 		float damp;
-		float wet;
-		float dry;
+		float wet_dry;
 		float mix_rate;
 		float extra_spread_base;
 		float extra_spread;
@@ -103,8 +102,7 @@ private:
 public:
 	void set_room_size(float p_size);
 	void set_damp(float p_damp);
-	void set_wet(float p_wet);
-	void set_dry(float p_dry);
+	void set_wet_dry(float p_wet_dry);
 	void set_predelay(float p_predelay); // in ms
 	void set_predelay_feedback(float p_predelay_fb); // in ms
 	void set_highpass(float p_frq);
