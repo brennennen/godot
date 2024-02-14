@@ -678,6 +678,15 @@ void SceneMultiplayer::_bind_methods() {
 
 	ADD_PROPERTY_DEFAULT("refuse_new_connections", false);
 
+	BIND_ENUM_CONSTANT(NETWORK_COMMAND_REMOTE_CALL);
+	BIND_ENUM_CONSTANT(NETWORK_COMMAND_SIMPLIFY_PATH);
+	BIND_ENUM_CONSTANT(NETWORK_COMMAND_CONFIRM_PATH);
+	BIND_ENUM_CONSTANT(NETWORK_COMMAND_RAW);
+	BIND_ENUM_CONSTANT(NETWORK_COMMAND_SPAWN);
+	BIND_ENUM_CONSTANT(NETWORK_COMMAND_DESPAWN);
+	BIND_ENUM_CONSTANT(NETWORK_COMMAND_SYNC);
+	BIND_ENUM_CONSTANT(NETWORK_COMMAND_SYS);
+
 	ADD_SIGNAL(MethodInfo("peer_authenticating", PropertyInfo(Variant::INT, "id")));
 	ADD_SIGNAL(MethodInfo("peer_authentication_failed", PropertyInfo(Variant::INT, "id")));
 	ADD_SIGNAL(MethodInfo("peer_packet", PropertyInfo(Variant::INT, "id"), PropertyInfo(Variant::PACKED_BYTE_ARRAY, "packet")));

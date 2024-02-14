@@ -98,7 +98,7 @@ public:
 
 	// This is the mask that will be used to extract the command.
 	enum {
-		CMD_MASK = 7, // 0x7 -> 0b00001111
+		CMD_MASK = 7, // 0x7 -> 0b00000111
 	};
 
 private:
@@ -204,5 +204,7 @@ public:
 	SceneMultiplayer();
 	~SceneMultiplayer();
 };
+
+VARIANT_ENUM_CAST(SceneMultiplayer::NetworkCommands);
 
 #endif // SCENE_MULTIPLAYER_H
